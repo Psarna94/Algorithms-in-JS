@@ -1,58 +1,36 @@
-var exmp=[2,4,7,1,5,3];
+var a = [34, 203, 3, 746, 200, 984, 198, 764, 9];
 
-function mergeSort(arr){
-  if(arr.length > 1){
-    var n = arr.length/2;
-    var l = n;
-    var r = arr.length - n;
+function mergeSort(arr)
+{
+    if (arr.length < 2)
+        return arr;
 
-    var L = []
-    for(var i=0; i<n; i++){
-      L.push(arr[i]);
-    }
+    var middle = parseInt(arr.length / 2);
+    var left   = arr.slice(0, middle);
+    var right  = arr.slice(middle, arr.length);
 
-    var R = []
-    for(var j=n; j<arr.length; j++){
-      R.push(arr[j]);
-    }
-
-    mergeSort(L);
-    mergeSort(R);
-    merge(L,R, arr)
-  }
-
-  return arr;
+    return merge(mergeSort(left), mergeSort(right));
 }
 
-function merge(left, right, arr){
-  var l = left.length;
-  var r = right.length;
-  var i,j,k = 0;
+function merge(left, right)
+{
+    var result = [];
 
-  while(i<l && j<r){
-    if(left[i]<right[j]){
-      arr[k] = left[i];
-      i++
-    }else{
-      arr[k] = right[i];
-      j++
+    while (left.length && right.length) {
+        if (left[0] <= right[0]) {
+            result.push(left.shift());
+        } else {
+            result.push(right.shift());
+        }
     }
-    k++
-  }
 
-  while(i<l){
-    arr[k] = left[i];
-    i++;
-    k++;
-  }
+    while (left.length)
+        result.push(left.shift());
 
-  while(j<r){
-    arr[k] = right[j];
-    j++;
-    k++;
-  }
+    while (right.length)
+        result.push(right.shift());
 
-  return arr;
+    return result;
 }
 
-console.log(mergeSort(exmp))
+console.log(mergeSort(a));
