@@ -1,8 +1,4 @@
-function swap(a,b){
-  var temp = a;
-  a = b;
-  b = temp;
-}
+
 
 function selectionSort(arr){
   for(var i=0; i<arr.length; i++){
@@ -17,8 +13,7 @@ function selectionSort(arr){
     var temp = arr[i];
     arr[i] = arr[iMin];
     arr[iMin] = temp;
-
-  }
+    }
 
   return arr;
 }
